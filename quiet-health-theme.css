@@ -108,6 +108,8 @@ body{background:var(--paper);color:var(--ink)}
 .cta-band{background:linear-gradient(110deg,#f4e9e3,#eeedf4);border-radius:18px}
 .cta-band .button-dark{background:var(--warm)}
 .footer{background:#30323b}.footer-inner{color:#f0f1f3}.footer p,.copyright{color:#b1b4bd}.footer .brand-mark{color:var(--orange)}
+.brand-logo{display:block;width:28px;height:28px;object-fit:cover;border-radius:9px;flex:0 0 auto}
+.keep-together{white-space:nowrap}
 
 @media(max-width:800px){
   .hero-time{background:
