@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>见微｜听见变化，保持陪伴</title>
+    <meta name="description" content="见微是一款面向成年子女的 AI 语言健康观察 App，在自然亲子对话中发现值得继续留意的语言现象。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="见微首页"><span class="brand-mark">◌</span><span>见微</span></a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#how">怎么工作 <span class="key">01</span></a>
+        <a href="#insights">观察维度 <span class="key">02</span></a>
+        <a href="#report">报告示例 <span class="key">03</span></a>
+        <a href="#faq">边界与隐私 <span class="key">04</span></a>
+      </nav>
+      <a class="nav-cta" href="#start">开始一次观察 <span>↗</span></a>
+      <button class="menu-toggle" aria-label="打开菜单">☰</button>
+    </header>
+
+    <main id="top">
+      <section class="hero section-wrap hero-time hero-listen" id="listen" aria-labelledby="heroLead">
+        <div class="hero-copy">
+          <p class="listen-lead" id="heroLead">有些变化，需要在一次次倾听中被看见。</p>
+          <div class="listen-copy">
+            <p class="eyebrow listen-eyebrow"><span class="pulse-dot"></span> TIME, HEARD WITH CARE</p>
+            <h1>听见父母<br /><em>细微的变化。</em></h1>
+            <p class="hero-desc">把一次次日常通话，变成克制、易懂的语言观察。</p>
+            <div class="hero-actions"><a class="button button-dark" id="startListeningButton" href="#start">开始一次 5 分钟观察 <span>→</span></a><a class="text-link" href="#how">看看它如何工作 <span>↓</span></a></div>
+          </div>
+        </div>
+        <div class="hero-visual listen-visual" aria-label="点击电话，开始一次倾听">
+          <button class="phone-trigger" id="phoneTrigger" type="button" aria-label="点击电话开始倾听">
+            <svg class="phone-art" viewBox="0 0 280 230" role="img" aria-label="线稿老式台式电话">
+              <path class="phone-shadow" d="M55 173c23 12 134 19 174-2" />
+              <path class="phone-body" d="M45 137c3-25 14-39 37-45 31-8 94-8 119 5 18 10 28 25 31 49l-9 20H53l-8-29Z" />
+              <path class="phone-panel" d="M70 129h137l9 22H62l8-22Z" />
+              <path class="dial" d="M108 109c9-8 48-8 58 0l-2 19h-55l-1-19Z" />
+              <circle cx="137" cy="117" r="5" /><path class="dial-mark" d="M120 110l-5-7m17 5-1-9m17 11 4-8" />
+              <path class="handset" d="M67 91c-13-2-24-10-29-20-4-8-1-15 7-18l19-7c6-2 10 2 12 8l5 17c2 6-1 10-7 12l-8 2c9 4 23 4 38 0l2 12c-18 7-29 8-39 6Z" />
+              <path class="cord" d="M197 158c15 15 7 23-6 26-16 3-11 16 7 18 23 3 29-13 45-9" />
+              <path class="button-light-art" d="M87 151h15m73 0h15" />
+              <circle class="phone-indicator" cx="190" cy="151" r="4" />
+            </svg>
+          </button>
+          <div class="ring-stage" id="ringStage">
+            <svg class="ring-art" viewBox="0 0 600 600" role="img" aria-label="由通话生长出的声音年轮">
+              <path class="connection-line" d="M-54 492 C-12 491 22 487 51 480 C73 475 91 469 106 464" />
+              <g class="ring-breath-group"><g class="ring-lines" id="ringLines"></g></g>
+            </svg>
+            <div class="call-labels" aria-live="polite"><span data-ring="3">08.09 · 通话 5分40秒</span><span data-ring="7">09.20 · 通话 6分10秒</span><span data-ring="11">10.02 · 通话 4分58秒</span><span class="transient-label" data-ring="14">10.28 · 通话 6分02秒</span></div>
+          </div>
+          <button class="listen-prompt" id="startListenPrompt" type="button"><span class="prompt-dot"></span><span class="prompt-idle">点击，开始一次倾听</span><span class="prompt-active">连接正在留下声音的痕迹……</span><span class="prompt-complete">一次倾听，已被收下</span></button>
+          <button class="skip-listen" id="skipListen" type="button">跳过动画 <span>↗</span></button>
+          <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false">声音关闭 <span>○</span></button>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="产品原则"><div class="ticker-track"><span>听见，而不是测试</span><b>✳</b><span>观察，而不是诊断</span><b>✳</b><span>陪伴，而不是焦虑</span><b>✳</b><span>听见，而不是测试</span><b>✳</b><span>观察，而不是诊断</span><b>✳</b></div></section>
+
+      <section class="dark-section dialogue-section" id="how">
+        <div class="section-wrap">
+          <div class="dialogue-intro"><p class="eyebrow light">A GENTLER WAY TO NOTICE</p><h2>每一句“没事”，<br /><span>都值得被好好听见。</span></h2><p>真实的亲子对话，是见微唯一需要的入口。没有测试感，只有生活里自然发生的声音。</p></div>
+          <div class="quote-cloud" aria-label="老人自然对话片段"><span>“吃过了，我吃的啥来着中午？”</span><span>“最近睡得挺好的。”</span><span>“没什么事，你不用回来，照顾好自己就行。”</span><span>“小区那棵桂花树，今年开得早。”</span><span>“我刚才要跟你说什么来着？”</span><span>“下周记得提醒我去买药。”</span><span>“你小时候最爱吃我做的面。”</span><span>“电视遥控器放哪儿去了？”</span><span>“今天风大，我就没下楼。”</span><span>“你爸刚才还在这儿呢。”</span><span>“菜买了，晚上做你爱吃的。”</span><span>“王阿姨说……她说什么来着？”</span><span>“药我吃过了，你别担心。”</span><span>“外孙最近是不是又长高了？”</span><span>“楼下新开了一家水果店。”</span><span>“你工作忙就不用总惦记我。”</span><span>“昨天谁给我打电话来着？”</span><span>“我记得放在桌上了呀。”</span><span>“天冷了，你多穿一点。”</span><span>“等你回来，我给你包饺子。”</span><span>“今天走了两圈，没觉得累。”</span><span>“那个……那个名字到嘴边了。”</span><span>“我跟你讲过这件事没有？”</span><span>“放心吧，家里都挺好的。”</span></div>
+          <div class="signal-notes"><span>停顿 +1.8s</span><span>重复表达</span><span>语速变化明显</span></div>
+          <div class="problem-grid"><article><span class="card-index">01</span><h3>聊近况</h3><p>从今天在做什么，到最近一次出门，让父母自然讲述刚发生的事。</p><div class="card-meta">近期事件 · 连续叙述</div></article><article><span class="card-index">02</span><h3>聊过去</h3><p>请他们分享一段熟悉的经历，听听记忆如何被组织成故事。</p><div class="card-meta">长期记忆 · 叙事组织</div></article><article><span class="card-index">03</span><h3>聊擅长的事</h3><p>让父母教你做一道菜、养一盆花，表达最熟悉的步骤与方法。</p><div class="card-meta">程序性任务 · 表达流畅度</div></article></div>
+        </div>
+      </section>
+
+      <section class="section-wrap insights analysis-section" id="insights"><div class="analysis-stage" id="analysisStage"><p class="eyebrow">LISTEN, THEN UNDERSTAND</p><h2>一句话，<em>五个观察点。</em></h2><p class="analysis-sub">AI 将语言学研究转译成家人看得懂的提示，只描述这次对话里真实发生的现象。</p><button class="quote-trigger" id="quoteTrigger">“昨天……那个……你王阿姨来过。”<span>点击听见分析</span></button><div class="analysis-points"><span>停顿节奏</span><span>找词与词汇</span><span>叙事连贯</span><span>重复表达</span><span>近期记忆</span></div></div></section>
+
+      <section class="report-section" id="report"><div class="section-wrap report-layout"><div class="report-copy"><p class="eyebrow light">A WARMER KIND OF REPORT</p><h2>8月28日，<br /><span>妈妈的声音。</span></h2><p>每一次通话，都会为她的声音年轮新增一圈。见微把变化放在时间里看，也把关心留在每一句话里。</p></div><div class="report-card warm-report"><div class="report-card-top"><span>妈妈 · 08.28</span><span class="status"><i></i> 6m02s 通话</span></div><h3>今天的声音，<br />已经被好好收下。</h3><div class="report-ringline"><span class="mini-ring"></span><strong>新增一圈年轮</strong><small>这是第 4 次高质量对话</small></div><div class="report-highlight attention"><span>最近三次通话</span><strong>妈妈找词时的停顿，<br />比过去一个月更频繁。</strong></div><div class="report-footer">继续自然地聊，不急着下结论 <span>↗</span></div></div></div></section>
+
+      <section class="steps section-wrap" id="start"><div class="section-intro split"><div><p class="eyebrow">004 / START SMALL</p><h2>从一通电话<br /><em>开始就好。</em></h2></div><p>不需要改变你们平时的相处方式。选择一个父母状态不错的时间，像往常一样聊聊最近的生活。</p></div><div class="step-list"><div class="step"><span>01</span><div><h3>补充一点背景</h3><p>年龄段、方言、近期状态，让问题更贴近生活。</p></div><b>＋</b></div><div class="step"><span>02</span><div><h3>拿到 4 个聊天话题</h3><p>从热身到近期经历，问题自然，不像考试。</p></div><b>＋</b></div><div class="step"><span>03</span><div><h3>完成一次 5 分钟通话</h3><p>录音前先征得父母同意，保持平时的说话方式。</p></div><b>＋</b></div><div class="step"><span>04</span><div><h3>上传并获取观察</h3><p>AI 先检查样本质量，再生成克制的单次报告。</p></div><b>＋</b></div></div><div class="cta-band"><div><span class="eyebrow">READY WHEN YOU ARE</span><h3>今天，和妈妈聊聊她的红烧肉。</h3></div><a class="button button-dark" href="#top">创建一次观察 <span>↗</span></a></div></section>
+    </main>
+    <footer class="footer" id="faq"><div class="section-wrap footer-inner"><div class="brand"><span class="brand-mark">◌</span><span>见微</span></div><p>帮助子女更好地听见父母，<br />也更温柔地理解变化。</p><div class="footer-links"><a href="#how">产品原理</a><a href="#report">报告边界</a><a href="#start">隐私与同意</a></div><span class="copyright">© 2026 JIANWEI / MADE WITH CARE</span></div></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

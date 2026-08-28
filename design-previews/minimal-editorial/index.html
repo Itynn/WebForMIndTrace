@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>见微 / Minimal Editorial Prototype</title>
+  <meta name="description" content="见微视觉设计原型：在自然亲子对话中观察语言变化。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* taste-skill pass: explicit dials for variance, motion, and density. */
+    :root { --design-variance: 8; --motion-intensity: 6; --visual-density: 4; --ease-taste-out: cubic-bezier(.23,1,.32,1); --ease-taste-in-out: cubic-bezier(.77,0,.175,1); }
+    .ring { animation-duration: 14s !important; animation-timing-function: var(--ease-taste-in-out) !important; transform-origin: 50% 50%; }
+    .feature-stage, .feature-item, .step { opacity: 0; transform: translateY(24px); transition-property: opacity, transform; transition-duration: 680ms; transition-timing-function: var(--ease-taste-out); transition-delay: var(--reveal-delay, 0ms); }
+    .feature-stage.is-in, .feature-item.is-in, .step.is-in { opacity: 1; transform: translateY(0); }
+    .feature-item { padding-left: 0 !important; transition-property: opacity, transform, color !important; }
+    .feature-item:hover, .feature-item.active { padding-left: 0 !important; transform: translateX(10px); }
+    @media (prefers-reduced-motion: reduce) { .ring { animation: none !important; } .feature-stage, .feature-item, .step { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="masthead">
+    <a class="wordmark" href="#top"><span class="mark">◌</span><span>见微</span><small>JIANWEI / 01</small></a>
+    <nav><a href="#principle">产品概念 <i>01</i></a><a href="#feature">核心观察 <i>02</i></a><a href="#start">开始一次观察 <i>03</i></a></nav>
+    <span class="status"><b></b> PRIVATE BETA</span>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker"><span class="orange-dot"></span> LANGUAGE HEALTH / NATURAL OBSERVATION</p>
+        <h1>听见父母<br /><em>细微的变化。</em></h1>
+        <p class="lede">一段普通的亲子聊天，帮助你更早、更温柔地留意语言状态。</p>
+        <div class="hero-meta"><span>5 MIN / ONE CONVERSATION</span><span>NO DIAGNOSIS / JUST SIGNALS</span></div>
+      </div>
+      <div class="hero-art" aria-label="动态声波年轮">
+        <div class="art-caption caption-a">SLOW SIGNAL<br /><em>LISTEN WITH CARE</em></div>
+        <div id="rings" class="rings"></div>
+        <div class="art-core"><span>见微</span><small>THE SPACE<br />BETWEEN WORDS</small></div>
+        <div class="art-caption caption-b"><strong>01</strong> / 一次对话观察</div>
+      </div>
+    </section>
+
+    <section class="manifesto" id="principle"><div class="wrap manifesto-inner"><p class="kicker">THE PREMISE / 001</p><p class="manifesto-line">不是把父母带进一场测试，<br /><span>而是在他们熟悉的生活里，听见表达。</span></p><div class="manifesto-foot"><span>自然发生</span><span>可被录音支持</span><span>克制地反馈</span></div></div></section>
+
+    <section class="dark-block" id="feature">
+      <div class="wrap feature-head"><div><p class="kicker light">CORE FEATURE / 002</p><h2>五分钟里，<br /><em>我们听什么？</em></h2></div><p class="feature-note">一次结果不是分数，也不是诊断。AI 只描述这段录音直接支持的语言现象，并把“不确定”保留下来。</p></div>
+      <div class="wrap editorial-grid">
+        <aside class="feature-index"><span>01—05</span><div class="vertical-rule"></div><span>SCROLL TO LISTEN</span></aside>
+        <div class="feature-stage"><div class="stage-top"><span id="stageCount">01 / 05</span><span id="stageLabel">言语流畅度</span></div><div class="stage-body"><div class="signal-wave" id="signalWave"></div><p id="stageCopy">停顿、语速、回答启动时间与自我修正，组成一段表达的呼吸感。</p></div><div class="stage-bottom"><span id="stageSource">AUDIO / RHYTHM</span><span>↗</span></div></div>
+        <div class="feature-list" role="listbox" aria-label="观察维度"><button class="feature-item active" data-index="0"><span>01</span><strong>言语流畅度</strong><i>↗</i></button><button class="feature-item" data-index="1"><span>02</span><strong>找词与词汇</strong><i>↗</i></button><button class="feature-item" data-index="2"><span>03</span><strong>叙事与逻辑</strong><i>↗</i></button><button class="feature-item" data-index="3"><span>04</span><strong>重复表达</strong><i>↗</i></button><button class="feature-item" data-index="4"><span>05</span><strong>近期事件</strong><i>↗</i></button></div>
+      </div>
+    </section>
+
+    <section class="mechanism wrap" id="start"><div class="mechanism-intro"><p class="kicker">THE MECHANISM / 003</p><h2>从一通电话<br /><em>开始就好。</em></h2><p>保持你们平时的相处方式。见微只在通话之后工作，不打断，也不实时提示。</p></div><div class="steps"><div class="step"><span>01</span><div><h3>补充一点背景</h3><p>年龄段、方言与近期状态，让话题更贴近生活。</p></div></div><div class="step"><span>02</span><div><h3>拿到四个聊天话题</h3><p>从热身到近期经历，问题自然，不像考试。</p></div></div><div class="step"><span>03</span><div><h3>上传一段清晰录音</h3><p>AI 先检查样本质量，再生成克制的单次观察。</p></div></div></div></section>
+
+    <section class="closing"><div class="wrap closing-inner"><p class="kicker light">A SMALLER WAY TO NOTICE</p><h2>观察，而不是<br /><em>预言。</em></h2><a class="arrow-link" href="#top">回到开头 <span>↗</span></a></div></section>
+  </main>
+  <footer class="footer wrap"><span>见微 / JIANWEI</span><span>VISUAL PROTOTYPE · 1440 × 900</span><span>© 2026</span></footer>
+  <script src="preview.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>见微 · Parchment / Tea Stain / Indigo 配色预览 v2</title>
+  <style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fffdf9}iframe{display:block;width:100%;height:100%;border:0}</style>
+</head>
+<body>
+  <iframe title="见微配色预览 v2" src="index.html"></iframe>
+  <script>
+    const frame=document.querySelector('iframe');
+    frame.addEventListener('load',()=>{const link=frame.contentDocument.createElement('link');link.rel='stylesheet';link.href='palette-preview-v2.css';frame.contentDocument.head.appendChild(link)});
+  </script>
+</body>
+</html>
