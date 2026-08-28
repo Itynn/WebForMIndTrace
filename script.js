@@ -12,6 +12,7 @@ const compactMotion = window.matchMedia?.('(max-width: 800px)');
 let listenTimer;
 let soundEnabled = false;
 let drawingAnimations = [];
+let cycleRun = 0;
 const RING_START_ANGLE = 2.42;
 
 const ringPoint = (radius, ringIndex, angle) => {
@@ -108,82 +109,162 @@ const resetDrawingState = () => {
   drawingAnimations = [];
   [connectionLine, ...ringLines.querySelectorAll('.ring-segment')].filter(Boolean).forEach((path) => {
     const length = Number(path.dataset.pathLength);
+    path.getAnimations().forEach((animation) => animation.cancel());
     path.style.removeProperty('animation');
+    path.style.removeProperty('opacity');
     path.style.strokeDasharray = `${length} ${length}`;
     path.style.strokeDashoffset = String(length);
     path.style.visibility = 'hidden';
   });
 };
 
-const revealPath = (path, delay, duration) => {
+const waitForCycle = (duration, token) => new Promise((resolve) => {
+  window.setTimeout(() => resolve(token === cycleRun), duration);
+});
+
+const animateDashPath = (path, from, to, duration, token, { hideOnFinish = false } = {}) => new Promise((resolve) => {
+  if (!path || token !== cycleRun) {
+    resolve(false);
+    return;
+  }
   const length = Number(path.dataset.pathLength);
   path.style.strokeDasharray = `${length} ${length}`;
-  path.style.strokeDashoffset = String(length);
+  path.style.strokeDashoffset = String(from);
   path.style.visibility = 'visible';
   const animation = path.animate(
-    [{ strokeDashoffset: length }, { strokeDashoffset: 0 }],
+    [{ strokeDashoffset: from }, { strokeDashoffset: to }],
     {
-      delay,
       duration,
       easing: 'cubic-bezier(0.77, 0, 0.175, 1)',
       fill: 'both',
     },
   );
-  animation.onfinish = () => {
-    path.style.strokeDasharray = 'none';
-    path.style.strokeDashoffset = '0';
-    animation.cancel();
-  };
   drawingAnimations.push(animation);
+  const cleanup = (completed) => {
+    drawingAnimations = drawingAnimations.filter((candidate) => candidate !== animation);
+    if (completed && token === cycleRun) {
+      path.style.strokeDashoffset = String(to);
+      if (to === 0) path.style.strokeDasharray = 'none';
+      if (hideOnFinish && to > 0) path.style.visibility = 'hidden';
+    }
+    resolve(completed && token === cycleRun);
+  };
+  animation.onfinish = () => cleanup(true);
+  animation.oncancel = () => cleanup(false);
+});
+
+const animatePathOpacity = (path, from, to, duration, token) => new Promise((resolve) => {
+  if (!path || token !== cycleRun) {
+    resolve(false);
+    return;
+  }
+  path.style.opacity = String(from);
+  const animation = path.animate(
+    [{ opacity: from }, { opacity: to }],
+    {
+      duration,
+      easing: 'cubic-bezier(0.77, 0, 0.175, 1)',
+      fill: 'both',
+    },
+  );
+  drawingAnimations.push(animation);
+  const cleanup = (completed) => {
+    drawingAnimations = drawingAnimations.filter((candidate) => candidate !== animation);
+    if (completed && token === cycleRun) path.style.opacity = String(to);
+    resolve(completed && token === cycleRun);
+  };
+  animation.onfinish = () => cleanup(true);
+  animation.oncancel = () => cleanup(false);
+});
+
+const playInnerRingPulse = async (rings, token) => {
+  const innerRings = rings.slice(1).reverse();
+  const timeScale = compactMotion?.matches ? 0.82 : 1;
+  if (!await waitForCycle(1200 * timeScale, token)) return;
+
+  // Keep the bark fixed. One inner record slowly recedes and returns before
+  // the next one moves, so the tree stays present instead of restarting.
+  while (token === cycleRun) {
+    for (const ring of innerRings) {
+      const length = Number(ring.dataset.pathLength);
+      if (!await animateDashPath(ring, 0, length, 1450 * timeScale, token)) return;
+      if (!await waitForCycle(320 * timeScale, token)) return;
+      if (!await animateDashPath(ring, length, 0, 1650 * timeScale, token)) return;
+      if (!await waitForCycle(620 * timeScale, token)) return;
+    }
+  }
 };
 
-const playRingDrawing = () => {
+const playRingSequence = async (token) => {
   resetDrawingState();
   const timeScale = compactMotion?.matches ? 0.62 : 1;
   const rings = [...ringLines.querySelectorAll('.ring-segment')];
-  const ringsFromInsideOut = rings.slice().reverse();
+  if (!rings.length || token !== cycleRun) return;
 
-  if (connectionLine) revealPath(connectionLine, 80 * timeScale, 920 * timeScale);
-  ringsFromInsideOut.forEach((path, index) => {
-    const isOuterBark = path.classList.contains('bark-segment');
-    const delay = (980 + index * 135) * timeScale;
-    const duration = (isOuterBark ? 1480 : 1080 + index % 3 * 70) * timeScale;
-    revealPath(path, delay, duration);
-  });
+  // Let the end of the phone line and the beginning of the bark overlap in
+  // time. Their endpoints already meet spatially, so the overlap reads as one
+  // continuous line changing character instead of two animations switching.
+  const connectionGrowth = animateDashPath(
+    connectionLine,
+    Number(connectionLine?.dataset.pathLength),
+    0,
+    1500 * timeScale,
+    token,
+  );
+  if (!await waitForCycle(900 * timeScale, token)) return;
+  const barkGrowth = animateDashPath(
+    rings[0],
+    Number(rings[0].dataset.pathLength),
+    0,
+    1800 * timeScale,
+    token,
+  );
+  if (!await waitForCycle(420 * timeScale, token)) return;
+  const connectionFade = animatePathOpacity(connectionLine, 0.78, 0.18, 950 * timeScale, token);
+  const transitionFinished = await Promise.all([connectionGrowth, barkGrowth, connectionFade]);
+  if (transitionFinished.some((finished) => !finished) || token !== cycleRun) return;
+
+  // Continue from the same fixed start point, closing every ring before the
+  // next inner record begins.
+  for (let index = 1; index < rings.length; index += 1) {
+    if (!await animateDashPath(rings[index], Number(rings[index].dataset.pathLength), 0, (285 + (index % 3) * 28) * timeScale, token)) return;
+  }
+
+  if (token !== cycleRun) return;
+  listenHero.classList.remove('is-started', 'is-animating');
+  listenHero.classList.add('is-complete');
+  playInnerRingPulse(rings, token);
 };
 
-const showCompleteRings = () => {
+const showCompleteRings = async (token, { immediate = false } = {}) => {
   const activeAnimations = drawingAnimations.slice();
   drawingAnimations = [];
   const paths = [connectionLine, ...ringLines.querySelectorAll('.ring-segment')].filter(Boolean);
-
-  paths.forEach((path) => {
+  const offsets = new Map(paths.map((path) => {
     const length = Number(path.dataset.pathLength);
     const computedOffset = Number.parseFloat(getComputedStyle(path).strokeDashoffset);
-    const currentOffset = Number.isFinite(computedOffset) ? Math.max(0, Math.min(length, computedOffset)) : length;
-    const animation = activeAnimations.find((candidate) => candidate.effect?.target === path);
-    animation?.cancel();
+    return [path, Number.isFinite(computedOffset) ? Math.max(0, Math.min(length, computedOffset)) : length];
+  }));
 
-    if (currentOffset <= 0.01) {
+  activeAnimations.forEach((animation) => animation.cancel());
+
+  const completions = paths.map((path) => {
+    path.style.visibility = 'visible';
+    const length = Number(path.dataset.pathLength);
+    const currentOffset = offsets.get(path);
+
+    if (immediate || currentOffset <= 0.01) {
       path.style.strokeDasharray = 'none';
       path.style.strokeDashoffset = '0';
       path.style.visibility = 'visible';
-      return;
+      return Promise.resolve(token === cycleRun);
     }
 
-    path.style.strokeDasharray = `${length} ${length}`;
-    path.style.strokeDashoffset = String(currentOffset);
-    const settle = path.animate(
-      [{ strokeDashoffset: currentOffset }, { strokeDashoffset: 0 }],
-      { duration: 360, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' },
-    );
-    settle.onfinish = () => {
-      path.style.strokeDasharray = 'none';
-      path.style.strokeDashoffset = '0';
-      settle.cancel();
-    };
-    drawingAnimations.push(settle);
+    return animateDashPath(path, currentOffset, 0, 520, token);
   });
+
+  if (connectionLine) connectionLine.style.opacity = '0.18';
+  return (await Promise.all(completions)).every(Boolean);
 };
 
 const playListeningTone = () => {
@@ -207,28 +288,32 @@ const playListeningTone = () => {
   window.setTimeout(() => context.close(), 900);
 };
 
-const completeListening = () => {
+const completeListening = async () => {
   if (!listenHero) return;
+  cycleRun += 1;
+  const token = cycleRun;
   window.clearTimeout(listenTimer);
-  showCompleteRings();
+  listenHero.classList.remove('is-animating');
+  const rings = [...ringLines.querySelectorAll('.ring-segment')];
+  const completed = await showCompleteRings(token, { immediate: Boolean(reducedMotion?.matches) });
+  if (!completed || token !== cycleRun) return;
   listenHero.classList.remove('is-started');
   listenHero.classList.add('is-complete');
+  if (!reducedMotion?.matches) playInnerRingPulse(rings, token);
 };
 
 const startListening = () => {
-  if (!listenHero || listenHero.classList.contains('is-complete')) return;
-  if (listenHero.classList.contains('is-started')) {
-    completeListening();
-    return;
-  }
+  if (!listenHero || listenHero.classList.contains('is-complete') || listenHero.classList.contains('is-animating')) return;
+  cycleRun += 1;
+  const token = cycleRun;
   listenHero.classList.add('is-started');
+  listenHero.classList.add('is-animating');
   playListeningTone();
   if (reducedMotion?.matches) {
     completeListening();
     return;
   }
-  playRingDrawing();
-  listenTimer = window.setTimeout(completeListening, compactMotion?.matches ? 3800 : 7000);
+  playRingSequence(token);
 };
 
 buildLivingRings();
@@ -246,19 +331,13 @@ soundToggle?.addEventListener('click', () => {
   soundToggle.innerHTML = `${soundEnabled ? '声音开启' : '声音关闭'} <span>${soundEnabled ? '●' : '○'}</span>`;
 });
 
-const finishOnIntent = () => {
-  if (listenHero?.classList.contains('is-started')) completeListening();
-};
-window.addEventListener('wheel', finishOnIntent, { passive: true });
-window.addEventListener('touchmove', finishOnIntent, { passive: true });
-
 let resizeFrame;
 window.addEventListener('resize', () => {
   window.cancelAnimationFrame(resizeFrame);
   resizeFrame = window.requestAnimationFrame(() => {
-    if (listenHero?.classList.contains('is-complete')) {
-      showCompleteRings();
-    } else if (!listenHero?.classList.contains('is-started')) {
+    // SVG geometry scales with its viewBox. Completed and in-progress paths do
+    // not need to be rebuilt on resize; resetting them caused stale states.
+    if (!listenHero?.classList.contains('is-started') && !listenHero?.classList.contains('is-complete')) {
       resetDrawingState();
     }
   });

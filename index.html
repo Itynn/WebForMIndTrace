@@ -41,8 +41,16 @@
               <path class="phone-shadow" d="M55 173c23 12 134 19 174-2" />
               <path class="phone-body" d="M45 137c3-25 14-39 37-45 31-8 94-8 119 5 18 10 28 25 31 49l-9 20H53l-8-29Z" />
               <path class="phone-panel" d="M70 129h137l9 22H62l8-22Z" />
-              <path class="dial" d="M108 109c9-8 48-8 58 0l-2 19h-55l-1-19Z" />
-              <circle cx="137" cy="117" r="5" /><path class="dial-mark" d="M120 110l-5-7m17 5-1-9m17 11 4-8" />
+              <circle class="dial-plate" cx="137" cy="117" r="25" />
+              <circle class="dial-center" cx="137" cy="117" r="7" />
+              <g class="dial-holes">
+                <circle cx="137" cy="98" r="3.1" /><circle cx="149" cy="102" r="3.1" />
+                <circle cx="158" cy="111" r="3.1" /><circle cx="160" cy="123" r="3.1" />
+                <circle cx="154" cy="134" r="3.1" /><circle cx="143" cy="141" r="3.1" />
+                <circle cx="130" cy="141" r="3.1" /><circle cx="120" cy="133" r="3.1" />
+                <circle cx="115" cy="121" r="3.1" /><circle cx="118" cy="108" r="3.1" />
+              </g>
+              <path class="dial-stop" d="M163 97v14l-7 2" />
               <path class="handset" d="M67 91c-13-2-24-10-29-20-4-8-1-15 7-18l19-7c6-2 10 2 12 8l5 17c2 6-1 10-7 12l-8 2c9 4 23 4 38 0l2 12c-18 7-29 8-39 6Z" />
               <path class="cord" d="M197 158c15 15 7 23-6 26-16 3-11 16 7 18 23 3 29-13 45-9" />
               <path class="button-light-art" d="M87 151h15m73 0h15" />
@@ -51,7 +59,7 @@
           </button>
           <div class="ring-stage" id="ringStage">
             <svg class="ring-art" viewBox="0 0 600 600" role="img" aria-label="由通话生长出的声音年轮">
-              <path class="connection-line" d="M-54 492 C-12 491 22 487 51 480 C73 475 91 469 106 464" />
+              <path class="connection-line" d="M-54 492 C-12 491 22 487 51 480 C73 475 91 469 103.57 466.79" />
               <g class="ring-breath-group"><g class="ring-lines" id="ringLines"></g></g>
             </svg>
             <div class="call-labels" aria-live="polite"><span data-ring="3">08.09 · 通话 5分40秒</span><span data-ring="7">09.20 · 通话 6分10秒</span><span data-ring="11">10.02 · 通话 4分58秒</span><span class="transient-label" data-ring="14">10.28 · 通话 6分02秒</span></div>
