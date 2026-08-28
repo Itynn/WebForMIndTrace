@@ -37,24 +37,43 @@
         </div>
         <div class="hero-visual listen-visual" aria-label="点击电话，开始一次倾听">
           <button class="phone-trigger" id="phoneTrigger" type="button" aria-label="点击电话开始倾听">
-            <svg class="phone-art" viewBox="0 0 280 230" role="img" aria-label="线稿老式台式电话">
-              <path class="phone-shadow" d="M55 173c23 12 134 19 174-2" />
-              <path class="phone-body" d="M45 137c3-25 14-39 37-45 31-8 94-8 119 5 18 10 28 25 31 49l-9 20H53l-8-29Z" />
-              <path class="phone-panel" d="M70 129h137l9 22H62l8-22Z" />
-              <circle class="dial-plate" cx="137" cy="117" r="25" />
-              <circle class="dial-center" cx="137" cy="117" r="7" />
-              <g class="dial-holes">
-                <circle cx="137" cy="98" r="3.1" /><circle cx="149" cy="102" r="3.1" />
-                <circle cx="158" cy="111" r="3.1" /><circle cx="160" cy="123" r="3.1" />
-                <circle cx="154" cy="134" r="3.1" /><circle cx="143" cy="141" r="3.1" />
-                <circle cx="130" cy="141" r="3.1" /><circle cx="120" cy="133" r="3.1" />
-                <circle cx="115" cy="121" r="3.1" /><circle cx="118" cy="108" r="3.1" />
+            <svg class="phone-art" viewBox="0 0 300 240" role="img" aria-label="线稿老式转盘拨号电话">
+              <ellipse class="phone-shadow" cx="150" cy="211" rx="103" ry="11" />
+              <path class="phone-body" d="M64 191 72 134c3-20 14-31 34-38 23-8 65-8 88 0 20 7 31 18 34 38l8 57c1 8-4 13-13 13H77c-9 0-14-5-13-13Z" />
+              <path class="phone-body-highlight" d="M78 187 85 137c2-14 10-22 25-27 20-7 60-7 80 0 15 5 23 13 25 27l7 50" />
+              <path class="phone-panel" d="M83 183 90 133c2-13 9-19 22-23 19-6 57-6 76 0 13 4 20 10 22 23l7 50Z" />
+              <path class="phone-base-line" d="M70 186h160M80 204l5 8m135-8-5 8" />
+
+              <g class="phone-cradle">
+                <path d="M76 110 80 79c1-6 5-9 11-9h8l4 32" />
+                <path d="M224 110 220 79c-1-6-5-9-11-9h-8l-4 32" />
+                <path d="M83 80h17m100 0h17" />
               </g>
-              <path class="dial-stop" d="M163 97v14l-7 2" />
-              <path class="handset" d="M67 91c-13-2-24-10-29-20-4-8-1-15 7-18l19-7c6-2 10 2 12 8l5 17c2 6-1 10-7 12l-8 2c9 4 23 4 38 0l2 12c-18 7-29 8-39 6Z" />
-              <path class="cord" d="M197 158c15 15 7 23-6 26-16 3-11 16 7 18 23 3 29-13 45-9" />
-              <path class="button-light-art" d="M87 151h15m73 0h15" />
-              <circle class="phone-indicator" cx="190" cy="151" r="4" />
+
+              <g class="rotary-dial">
+                <circle class="dial-plate" cx="150" cy="146" r="48" />
+                <circle class="dial-track" cx="150" cy="146" r="38" />
+                <g class="dial-holes">
+                  <circle cx="150" cy="116" r="6.5" /><circle cx="168" cy="122" r="6.5" />
+                  <circle cx="179" cy="137" r="6.5" /><circle cx="179" cy="155" r="6.5" />
+                  <circle cx="168" cy="170" r="6.5" /><circle cx="150" cy="176" r="6.5" />
+                  <circle cx="132" cy="170" r="6.5" /><circle cx="121" cy="155" r="6.5" />
+                  <circle cx="121" cy="137" r="6.5" /><circle cx="132" cy="122" r="6.5" />
+                </g>
+                <circle class="dial-center" cx="150" cy="146" r="15" />
+                <circle class="dial-center-inner" cx="150" cy="146" r="7" />
+                <path class="dial-stop" d="M194 111v22l-10 4" />
+                <path class="dial-detail" d="M146 146h8m-4-4v8" />
+              </g>
+
+              <g class="handset">
+                <path class="handset-shell" d="M40 69c-2-9 3-16 12-19l18-7c8-3 14 1 17 9l4 12c17-6 36-9 59-9s42 3 59 9l4-12c3-8 9-12 17-9l18 7c9 3 14 10 12 19l-4 16c-2 8-9 12-17 10l-21-7c-7-2-10-8-9-15-17-5-36-7-59-7s-42 2-59 7c1 7-2 13-9 15l-21 7c-8 2-15-2-17-10Z" />
+                <path class="handset-detail" d="M48 67 73 57m154 0 25 10M92 64c17-6 36-9 58-9s41 3 58 9" />
+                <path class="handset-grip" d="M106 61c12-2 27-3 44-3s32 1 44 3" />
+              </g>
+
+              <path class="cord" d="M224 188c19 10 21 23 7 30-15 8-25-5-12-12 18-10 31 7 49 2" />
+              <circle class="phone-indicator" cx="205" cy="186" r="3.2" />
             </svg>
           </button>
           <div class="ring-stage" id="ringStage">

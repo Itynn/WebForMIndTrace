@@ -333,18 +333,36 @@ body{background:var(--paper);color:var(--ink)}
   box-shadow:0 28px 48px rgba(100,75,46,.16),0 0 50px rgba(160,124,73,.08);
   animation:phoneBreathStrong 3.2s var(--ease-in-out) infinite;
 }
-.phone-body{fill:rgba(177,141,94,.08);stroke:#776650;stroke-width:2.1}
-.phone-panel{fill:rgba(245,239,229,.6);stroke:#8a755a;stroke-width:1.4}
+.phone-art ellipse{vector-effect:non-scaling-stroke}
+.phone-body{fill:rgba(177,141,94,.11);stroke:#6f604e;stroke-width:2.2}
+.phone-body-highlight{fill:none;stroke:rgba(255,255,255,.62);stroke-width:1.1;stroke-linecap:round}
+.phone-panel{fill:rgba(245,239,229,.52);stroke:#8a755a;stroke-width:1.35}
+.phone-base-line,.phone-cradle path{fill:none;stroke:#756550;stroke-linecap:round;stroke-linejoin:round}
+.phone-base-line{stroke-width:1.5;opacity:.72}.phone-cradle path{stroke-width:2}
 .handset{
-  fill:rgba(119,135,137,.12);
-  stroke:var(--hero-ink);
-  stroke-width:2.4;
   transform-box:fill-box;
-  transform-origin:72% 78%;
+  transform-origin:center;
   animation:handsetIdle 3.2s var(--ease-in-out) infinite;
 }
-.dial,.dial-mark,.dial-plate,.dial-center,.dial-holes circle,.dial-stop,.button-light-art,.phone-shadow{fill:none;stroke:#88775f;stroke-linecap:round;stroke-linejoin:round}
-.dial-plate{fill:rgba(245,239,229,.62);stroke-width:1.8}.dial-center{fill:rgba(136,119,95,.14);stroke-width:1.4}.dial-holes circle{fill:rgba(119,104,80,.1);stroke-width:1.2}.dial-stop{stroke-width:1.5}
+.handset-shell{
+  fill:rgba(89,105,111,.13);
+  stroke:var(--hero-ink);
+  stroke-width:2.5;
+  stroke-linejoin:round;
+}
+.handset-detail,.handset-grip{
+  fill:none;
+  stroke:#69727a;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.handset-detail{stroke-width:1.25;opacity:.66}.handset-grip{stroke-width:3.8;opacity:.23}
+.rotary-dial{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.dial-plate,.dial-track,.dial-center,.dial-center-inner,.dial-holes circle,.dial-stop,.dial-detail,.phone-shadow{stroke:#88775f;stroke-linecap:round;stroke-linejoin:round}
+.dial-plate{fill:rgba(245,239,229,.76);stroke-width:2}.dial-track{fill:rgba(111,98,80,.05);stroke-width:1.35}.dial-center{fill:rgba(248,244,237,.9);stroke-width:1.6}.dial-center-inner{fill:rgba(136,119,95,.11);stroke-width:1.15}.dial-holes circle{fill:rgba(104,91,74,.11);stroke-width:1.45}.dial-stop{fill:none;stroke-width:2}.dial-detail{fill:none;stroke-width:1;opacity:.56}.phone-shadow{fill:rgba(80,66,52,.06);stroke-width:1;opacity:.42}
 .cord{
   stroke:#647880;
   stroke-width:2.4;
