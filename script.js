@@ -371,10 +371,3 @@ const quoteTrigger = document.getElementById('quoteTrigger');
 quoteTrigger?.addEventListener('click', () => {
   document.getElementById('analysisStage')?.classList.toggle('active');
 });
-const menu = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav-links');
-menu?.addEventListener('click', () => {
-  nav.classList.toggle('open');
-  nav.style.display = nav.classList.contains('open') ? 'flex' : '';
-  nav.style.position = 'absolute'; nav.style.top = '76px'; nav.style.left = '0'; nav.style.right = '0'; nav.style.background = '#f6f1ea'; nav.style.padding = '22px'; nav.style.flexDirection = 'column'; nav.style.zIndex = '20';
-});

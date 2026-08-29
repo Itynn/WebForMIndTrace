@@ -14,6 +14,7 @@
 
 html{background:var(--paper)}
 body{background:var(--paper);color:var(--ink)}
+body{overflow-x:hidden}
 .grain{opacity:.025}
 
 .topbar{
@@ -26,7 +27,6 @@ body{background:var(--paper);color:var(--ink)}
 .topbar .brand-mark{color:var(--orange)}
 .topbar .key{color:#a5a7ad}
 .topbar .nav-cta{border-color:var(--ink)}
-.topbar .menu-toggle{color:var(--ink)}
 
 .hero-time{
   color:var(--ink);
@@ -75,6 +75,7 @@ body{background:var(--paper);color:var(--ink)}
   box-shadow:0 28px 90px rgba(63,65,84,.1);
 }
 .analysis-stage h2 em,.quote-trigger span{color:#c98668}
+.analysis-sub{white-space:nowrap;max-width:none;font-size:clamp(11px,1.1vw,14px)}
 .analysis-points span{color:#596372;border:0;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;min-width:116px;height:52px;padding:13px 20px;background:linear-gradient(120deg,#dceaf0,#cbd9ed);box-shadow:0 12px 28px rgba(66,79,108,.14),inset 0 0 0 1px rgba(255,255,255,.55);text-shadow:none}
 .analysis-points span:nth-child(1){background:linear-gradient(120deg,#dbeaf0 0%,#bcd7e2 100%)}
 .analysis-points span:nth-child(2){background:linear-gradient(120deg,#e4e0f2 0%,#c8c3df 100%)}
@@ -162,6 +163,7 @@ body{background:var(--paper);color:var(--ink)}
   .dialogue-intro{background:linear-gradient(180deg,rgba(52,55,66,.98),rgba(52,55,66,.82) 75%,rgba(52,55,66,0))}
   .warm-report{box-shadow:10px 10px 0 rgba(83,78,91,.15)}
   .analysis-stage.active .analysis-points span{font-size:13px;min-width:100px;height:44px;padding:10px 14px}
+  .analysis-sub{font-size:10px;letter-spacing:-.03em}
   .analysis-stage .quote-trigger{margin-top:52px;padding:13px 18px 12px}
   .analysis-stage .analysis-points span:nth-child(1){top:52%;left:4%}
   .analysis-stage .analysis-points span:nth-child(2){top:56%;right:4%}
@@ -175,4 +177,9 @@ body{background:var(--paper);color:var(--ink)}
   .baseline-card{padding:16px 14px 13px}
   .baseline-card-top{display:block;margin-bottom:9px}
   .baseline-card-top small{display:block;margin-top:3px;font-size:10px}
+}
+
+@media (min-width:801px) and (max-width:1100px){
+  .report-layout{gap:40px;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+  .report-card{width:100%;max-width:100%;justify-self:stretch}
 }
