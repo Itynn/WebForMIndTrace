@@ -6,8 +6,8 @@
 .core{display:none!important}
 .ring{transform:rotate(var(--r)) scale(var(--s)) translate3d(var(--x,0px),var(--y,0px),0);animation-timing-function:cubic-bezier(.22,.61,.36,1);will-change:transform,border-radius}
 .rings:after{content:"";position:absolute;inset:44%;border-radius:50%;background:var(--paper);opacity:.86;filter:blur(7px);pointer-events:none}
-.problem-grid article,.insight-main,.insight-side>div,.report-card,.step{opacity:0;transform:translateY(30px);filter:blur(5px)}
-.problem-grid article.is-visible,.insight-main.is-visible,.insight-side>div.is-visible,.report-card.is-visible,.step.is-visible{opacity:1;transform:none;filter:none;transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),filter .7s ease}
+.problem-grid article,.insight-main,.insight-side>div,.report-card,.step,.baseline-card{opacity:0;transform:translateY(30px);filter:blur(5px)}
+.problem-grid article.is-visible,.insight-main.is-visible,.insight-side>div.is-visible,.report-card.is-visible,.step.is-visible,.baseline-card.is-visible{opacity:1;transform:none;filter:none;transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1),filter .7s ease}
 @media(prefers-reduced-motion:reduce){.ring{animation:none!important}.problem-grid article,.insight-main,.insight-side>div,.report-card,.step{opacity:1;transform:none;filter:none}}
 
 /* Time + intimacy direction */
@@ -149,7 +149,7 @@ body{background:var(--paper);color:var(--ink)}
 
 /* Emil Kowalski animate skill: one-shot, transform + opacity scroll entrance */
 :root{--ease-out:cubic-bezier(.23,1,.32,1)}
-.problem-grid article,.insight-main,.insight-side>div,.report-card,.step{
+.problem-grid article,.insight-main,.insight-side>div,.report-card,.step,.baseline-card{
   opacity:0;
   filter:none;
   transform:translateY(20px) scale(.97);
@@ -157,7 +157,7 @@ body{background:var(--paper);color:var(--ink)}
   will-change:transform,opacity;
 }
 .report-card{transform:translateX(42px) scale(.97)}
-.problem-grid article.is-visible,.insight-main.is-visible,.insight-side>div.is-visible,.report-card.is-visible,.step.is-visible{
+.problem-grid article.is-visible,.insight-main.is-visible,.insight-side>div.is-visible,.report-card.is-visible,.step.is-visible,.baseline-card.is-visible{
   opacity:1;
   filter:none;
   transform:translate3d(0,0,0) scale(1);
@@ -170,7 +170,7 @@ body{background:var(--paper);color:var(--ink)}
   .report-card{transform:translateY(20px) scale(.97)}
 }
 @media(prefers-reduced-motion:reduce){
-  .problem-grid article,.insight-main,.insight-side>div,.report-card,.step{
+  .problem-grid article,.insight-main,.insight-side>div,.report-card,.step,.baseline-card{
     transform:none;
     filter:none;
     transition:opacity 200ms ease;

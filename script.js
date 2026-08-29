@@ -350,7 +350,7 @@ window.addEventListener('pageshow', () => {
 });
 
 // Ease-out + blur-to-sharp staggered reveals, inspired by Emil Kowalski's motion guidance.
-const motionTargets = document.querySelectorAll('.problem-grid article, .insight-main, .insight-side > div, .report-card, .step');
+const motionTargets = document.querySelectorAll('.problem-grid article, .insight-main, .insight-side > div, .report-card, .step, .baseline-card');
 const motionObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
