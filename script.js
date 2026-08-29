@@ -321,10 +321,6 @@ prepareConnectionLine();
 phoneTrigger?.addEventListener('click', startListening);
 startListenPrompt?.addEventListener('click', startListening);
 skipListen?.addEventListener('click', completeListening);
-startListeningButton?.addEventListener('click', (event) => {
-  event.preventDefault();
-  document.getElementById('start')?.scrollIntoView({ behavior: reducedMotion?.matches ? 'auto' : 'smooth' });
-});
 soundToggle?.addEventListener('click', () => {
   soundEnabled = !soundEnabled;
   soundToggle.setAttribute('aria-pressed', String(soundEnabled));
