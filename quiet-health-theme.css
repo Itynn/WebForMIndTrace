@@ -151,7 +151,7 @@ body{overflow-x:hidden}
 .step>span,.step b{color:#8d829d}
 .cta-band{background:linear-gradient(110deg,#f4e9e3,#eeedf4);border-radius:18px}
 .cta-band .button-dark{background:var(--warm)}
-.footer{background:#30323b}.footer-inner{color:#f0f1f3}.footer p,.copyright{color:#b1b4bd}.footer .brand-mark{color:var(--orange)}
+.footer{background:#30323b}.footer-inner{color:#f0f1f3}.footer p,.copyright{color:#b1b4bd}.copyright{margin-left:auto;text-align:right}.footer .brand-mark{color:var(--orange)}
 .brand-logo{display:block;width:28px;height:28px;object-fit:cover;border-radius:9px;flex:0 0 auto}
 .keep-together{white-space:nowrap}
 
@@ -177,6 +177,7 @@ body{overflow-x:hidden}
   .baseline-card{padding:16px 14px 13px}
   .baseline-card-top{display:block;margin-bottom:9px}
   .baseline-card-top small{display:block;margin-top:3px;font-size:10px}
+  .copyright{margin-left:0;text-align:right}
 }
 
 @media (min-width:801px) and (max-width:1100px){
