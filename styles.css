@@ -566,3 +566,52 @@ body{background:var(--paper);color:var(--ink)}
 .hero-listen .connection-line{visibility:hidden}
 .hero-listen .cord{animation:none}
 .hero-listen.is-animating .ring-lines path.ring-segment{animation:none!important}
+
+/* Slow cross-screen drift for the dialogue background. Each phrase travels
+   through the section on its own timing and a slightly different vertical
+   path, keeping the background alive without competing with the copy. */
+.dialogue-section .quote-cloud span{
+  animation: dialogueCrossScreen var(--float-duration,48s) linear var(--float-delay,0s) infinite;
+  will-change:transform;
+}
+@keyframes dialogueCrossScreen{
+  0%{transform:rotate(var(--rot,0deg)) translate3d(-120vw,var(--dy-a,-8px),0)}
+  24%{transform:rotate(calc(var(--rot,0deg) + var(--rot-a,.5deg))) translate3d(-58vw,var(--dy-b,5px),0)}
+  51%{transform:rotate(calc(var(--rot,0deg) - var(--rot-b,.7deg))) translate3d(4vw,var(--dy-c,-5px),0)}
+  76%{transform:rotate(calc(var(--rot,0deg) + var(--rot-c,.4deg))) translate3d(61vw,var(--dy-d,7px),0)}
+  100%{transform:rotate(var(--rot,0deg)) translate3d(120vw,var(--dy-e,-4px),0)}
+}
+.dialogue-section .quote-cloud span:nth-child(3n){--float-duration:58s}
+.dialogue-section .quote-cloud span:nth-child(3n+1){--float-duration:44s}
+.dialogue-section .quote-cloud span:nth-child(4n){--float-duration:52s}
+.dialogue-section .quote-cloud span:nth-child(5n){--float-duration:64s}
+.dialogue-section .quote-cloud span:nth-child(1){--dy-a:-10px;--dy-b:4px;--dy-c:-3px;--dy-d:8px;--dy-e:-6px;--rot-a:.7deg;--rot-b:.4deg;--rot-c:.8deg;--float-delay:-3s}
+.dialogue-section .quote-cloud span:nth-child(2){--dy-a:7px;--dy-b:-5px;--dy-c:8px;--dy-d:-2px;--dy-e:6px;--rot-a:.3deg;--rot-b:.9deg;--rot-c:.5deg;--float-delay:-11s}
+.dialogue-section .quote-cloud span:nth-child(3){--dy-a:-4px;--dy-b:9px;--dy-c:-7px;--dy-d:3px;--dy-e:-5px;--rot-a:.8deg;--rot-b:.3deg;--rot-c:.6deg;--float-delay:-17s}
+.dialogue-section .quote-cloud span:nth-child(4){--dy-a:8px;--dy-b:-3px;--dy-c:6px;--dy-d:-7px;--dy-e:4px;--rot-a:.4deg;--rot-b:.8deg;--rot-c:.3deg;--float-delay:-7s}
+.dialogue-section .quote-cloud span:nth-child(5){--dy-a:-7px;--dy-b:5px;--dy-c:-9px;--dy-d:4px;--dy-e:-3px;--rot-a:.6deg;--rot-b:.5deg;--rot-c:.9deg;--float-delay:-14s}
+.dialogue-section .quote-cloud span:nth-child(6){--float-delay:-5s}
+.dialogue-section .quote-cloud span:nth-child(7){--float-delay:-19s}
+.dialogue-section .quote-cloud span:nth-child(8){--float-delay:-9s}
+.dialogue-section .quote-cloud span:nth-child(9){--float-delay:-22s}
+.dialogue-section .quote-cloud span:nth-child(10){--float-delay:-13s}
+.dialogue-section .quote-cloud span:nth-child(11){--float-delay:-2s}
+.dialogue-section .quote-cloud span:nth-child(12){--float-delay:-16s}
+.dialogue-section .quote-cloud span:nth-child(13){--float-delay:-8s}
+.dialogue-section .quote-cloud span:nth-child(14){--float-delay:-20s}
+.dialogue-section .quote-cloud span:nth-child(15){--float-delay:-12s}
+.dialogue-section .quote-cloud span:nth-child(16){--float-delay:-4s}
+.dialogue-section .quote-cloud span:nth-child(17){--float-delay:-18s}
+.dialogue-section .quote-cloud span:nth-child(18){--float-delay:-6s}
+.dialogue-section .quote-cloud span:nth-child(19){--float-delay:-15s}
+.dialogue-section .quote-cloud span:nth-child(20){--float-delay:-23s}
+.dialogue-section .quote-cloud span:nth-child(21){--float-delay:-10s}
+.dialogue-section .quote-cloud span:nth-child(22){--float-delay:-21s}
+.dialogue-section .quote-cloud span:nth-child(23){--float-delay:-1s}
+.dialogue-section .quote-cloud span:nth-child(24){--float-delay:-17s}
+@media(max-width:800px){
+  .dialogue-section .quote-cloud span{animation-duration:40s}
+}
+@media(prefers-reduced-motion:reduce){
+  .dialogue-section .quote-cloud span{animation:none;transform:rotate(var(--rot,0deg))}
+}
